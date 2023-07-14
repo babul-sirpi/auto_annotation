@@ -276,6 +276,7 @@ if download_button:
             download_link = create_folder_download_link(new_annotation_path)
             download_link_placeholder.markdown(download_link, unsafe_allow_html=True)
             info_message.info("Download link is ready now")
+            shutil.rmtree(new_annotation_path)
             
             
 
