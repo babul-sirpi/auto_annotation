@@ -222,7 +222,7 @@ add_bg_from_local(background_img_path)
 col1, col2,col3 = st.columns([1,2,1])
 with col2:
     # Customizing the Streamlit app's template color
-    st.markdown("<h1 style='text-align: center; color: #64469B;'font-size:30px; font-family:Helvetica;'>Auto Annotation</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #64469B;'font-size:30px; font-family:Helvetica;'>Bike Part Auto Annotation</h1>", unsafe_allow_html=True)
 with col1:
     st.header("Upload video")
     # Adding file uploader to sidebar for selecting videos
