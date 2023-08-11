@@ -210,30 +210,61 @@ if not os.path.exists(ann_path):
 set_option('deprecation.showfileUploaderEncoding', False)
 
 st.set_page_config(
-    page_title="Auto annotation",  # Setting page title
+    page_title="Auto Annotation",  # Setting page title
     page_icon="🤖",  # Setting page icon
     layout="wide",  # Setting layout to wide
     initial_sidebar_state="expanded"  # Expanding sidebar by default
 )
 # Creating main page heading
-background_img_path = os.path.join(current_directory,"background.jpg")
+background_img_path = os.path.join(current_directory,"background_update.jpg")
 add_bg_from_local(background_img_path)
 
-col1, col2,col3 = st.columns([1,2,1])
-with col2:
+col1, col2,col3,col4= st.columns([0.5,0.8,1,0.7])
+with col3:
+    cs_style = """<style>
+    h2 {
+        font-family: "Source Sans Pro", sans-serif;
+        font-weight: 600;
+        color: rgb(49, 51, 63);
+        letter-spacing: -0.005em;
+        padding: 0.2rem 0px;
+        margin: 0px;
+        margin-left:100px;
+        line-height: 1.2;
+    }</style>"""
+    st.markdown(cs_style, unsafe_allow_html=True)
     # Customizing the Streamlit app's template color
-    st.markdown("<h1 style='text-align: center; color: #64469B;'font-size:30px; font-family:Helvetica;'>Bike Part Auto Annotation</h1>", unsafe_allow_html=True)
-with col1:
-    st.header("Upload video")
+    st.header("Bike Part Auto Annotation")
+    
+    custom_css = """
+    <style>
+    .css-1gulkj5 {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        padding: 0.6rem;
+        width:400px;
+        background-color: #FF7B33;
+        border-radius: 3rem;
+        color: rgb(49, 51, 63);
+        margin-left:100px;
+    }
+    </style>
+    """
+    st.markdown(custom_css, unsafe_allow_html=True)
     # Adding file uploader to sidebar for selecting videos
-    uploaded_file = st.file_uploader("For annotation please click on Detect video button", type=["mp4"])
-    # Model Options
+    uploaded_file = st.file_uploader(" ",type=["mp4"],label_visibility="hidden")
     # Customizing the button color
     button_style = """
         <style>
         .stButton button {
-            background-color:#344ceb;
+            background-color:#8833FF;
             color: #ffffff;
+            padding: 0.5rem;
+            width:300px;
+            margin-top:50px;
+            border-radius: 3rem;
+            margin-left:120px;
         }
         </style>
         """
@@ -257,11 +288,22 @@ if detect_objects:
                 data_prep(video_path)
             info_message.info("Annotation Completed")
 
-with col2:
+with col4:
     info_message = st.empty()
-    info_message.info("Click here after annotation completed")
-    # Provide a download link for the predicted video
-    st.markdown("### Download annotated file")
+    button_style2 = """
+        <style>
+        .css-7ym5gk .ef3psqc11 button {
+            background-color:#8833FF;
+            color: #ffffff;
+            padding: 0.5rem;
+            width:300px;
+            border-radius: 3rem;
+            margin-right:100px;
+        }
+        </style>
+        """
+    # Displaying the button
+    st.markdown(button_style2, unsafe_allow_html=True)
     # Customizing the button color
     download_button = st.button("Download")
 new_annotation_path = os.path.join(current_directory,"new_annotation_path")
@@ -276,7 +318,6 @@ if download_button:
             download_link = create_folder_download_link(new_annotation_path)
             download_link_placeholder.markdown(download_link, unsafe_allow_html=True)
             info_message.info("Download link is ready now")
-            shutil.rmtree(new_annotation_path)
             
             
 
